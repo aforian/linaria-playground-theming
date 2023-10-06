@@ -78,3 +78,37 @@ linaria 會在 css 產出吃 css variable 的樣式定義，可在 dist/style.cs
 ```
 利用點擊 button，可以發現 style 中的 --bbb0x40-0 對應的值 (133px) 不斷地在增加。
 linaria 內部實際上透過 style props 傳入 { '--bbb0x40-0': recSize }，因而達到動態改變樣式的效果。 
+
+## 實作 Theme 調查：利用 css variable 實作 theming
+
+### 1. 設定 webpack
+
+1. .babelrc 加入 `"@linaria"`
+2. loader 部分需要改為 `@linaria/webpack-loader`
+3. 加入 classNameSlug 避免 theming 用的 class name 被 hashing
+
+加入後可以看到原本在開發時用的命名 `.themeLight` 與 `.themeDark` 可以被保留，剩餘 pages/components 的 style 仍可保留 hash：
+
+```css
+.themeLight{--colors-primary:deeppink;--colors-background:lightgrey;}
+.themeDark{--colors-primary:lightpink;--colors-background:black;}
+.t183ux9g{font-family:sans-serif;font-size:48px;color:var(--colors-primary);}
+.podgs4h{padding:20px;color:var(--colors-primary);background-color:var(--colors-background);}
+
+.themeLight{--colors-primary:navy;--colors-background:lightgrey;}
+.themeDark{--colors-primary:lightskyblue;--colors-background:black;}
+.s1qdzus6{font-family:sans-serif;font-size:48px;color:var(--colors-primary);}
+.secr2ac{padding:20px;color:var(--colors-primary);background-color:var(--colors-background);}
+```
+
+#### 注意事項
+
+假如引入的元件中有重複的 theming classname，對於 linaria 都是獨立的 class，並不會組合成同一個 class 中，而是會分別打包；假如有相同的屬性，會根據引入順序由後面蓋掉前面。這邊使用了 `assets/
+
+### 2. 使用外部 theme.css 覆蓋
+
+這邊使用了 `public/override-theme.css` 模擬引入外部自訂 theme 的效果。
+
+**可以在 public/index.html 中註解 `/override-theme.css` 看差異**
+
+![override demo](./readme-sources/override-demo.png)

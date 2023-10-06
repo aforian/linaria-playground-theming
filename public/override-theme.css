@@ -1,0 +1,8 @@
+.themeLight{
+	--colors-primary: forestgreen;
+	--colors-background:lightgrey;
+}
+.themeDark{
+	--colors-primary: lightgreen;
+	--colors-background:black;
+}
