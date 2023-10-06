@@ -58,8 +58,8 @@ module.exports = {
             loader: '@linaria/webpack-loader',
             options: {
               sourceMap: dev,
-              // displayName: true, // default: false
-              // variableNameConfig: "dashes", // default: "var"
+              // customize static theme class for outer overwriting
+              classNameSlug: (hash, title) => title.toLowerCase().includes('theme') ? title : hash,
             },
           },
         ],
