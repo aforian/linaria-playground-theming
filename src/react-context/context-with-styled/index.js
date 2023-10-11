@@ -14,9 +14,22 @@ const PrimaryText = withTheme(styled.div`
   background-color: ${({ theme }) => theme.colors.background};
 `);
 
+const SecondaryText = withTheme(styled(PrimaryText)`
+  color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.colors.primary};
+`)
+
+const Box = withTheme(styled.div`
+  background-color: ${({ theme }) => theme.colors.primary};
+  height: ${(props) => props.recSize}px;
+  width: ${(props) => props.recSize}px;
+  color: ${({ theme }) => theme.colors.background};
+`);
+
 function App() {
   const { theme, updateTheme } = useTheme();
   const nextTheme = theme.name === 'light' ? 'dark' : 'light';
+  const [recSize, setSize] = React.useState(48);
 
   return (
     <div>
@@ -28,6 +41,17 @@ function App() {
         <PrimaryText>
           This text is the primary color
         </PrimaryText>
+        <SecondaryText>
+          This text is the secondary color
+        </SecondaryText>
+        <button
+          onClick={() => {
+            setSize((prev) => prev + 5);
+          }}
+        >
+          +1 Size
+        </button>
+        <Box recSize={recSize}>{recSize}</Box>
       </div>
     </div>
   )

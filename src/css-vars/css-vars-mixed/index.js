@@ -24,9 +24,22 @@ const PrimaryText = styled.div`
   background-color: var(--colors-background);
 `;
 
+const SecondaryText = styled(PrimaryText)`
+  padding: 20px;
+  color: var(--colors-background);
+  background-color: var(--colors-primary);
+`;
+
+const Box = styled.div`
+  background-color: var(--colors-primary);
+  height: ${(props) => props.recSize}px;
+  width: ${(props) => props.recSize}px;
+`;
+
 function App() {
   const [theme, setTheme] = React.useState('light');
   const nextTheme = theme === 'light' ? 'dark' : 'light';
+  const [recSize, setSize] = React.useState(48);
 
   return (
     <div>
@@ -38,6 +51,17 @@ function App() {
         <PrimaryText>
           This text is the primary color
         </PrimaryText>
+        <SecondaryText>
+          This text is the secondary color
+        </SecondaryText>
+        <button
+          onClick={() => {
+            setSize((prev) => prev + 5);
+          }}
+        >
+          +1 Size
+        </button>
+        <Box recSize={recSize}>{recSize}</Box>
       </div>
     </div>
   )

@@ -9,6 +9,7 @@ const App = () => {
   return (
     <div>
       <CSSVars />
+      <hr />
       <ReactContext />
     </div>
   );
