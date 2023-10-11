@@ -26,16 +26,31 @@ const PrimaryText = styled.div`
   background-color: var(--colors-background);
 `;
 
+const Box = styled.div`
+  background-color: var(--colors-primary);
+  height: ${(props) => props.recSize}px;
+  width: ${(props) => props.recSize}px;
+`;
+
 function App() {
   const [theme, setTheme] = React.useState('light');
   const nextTheme = theme === 'light' ? 'dark' : 'light';
+  const [recSize, setSize] = React.useState(48);
 
   return (
     <div>
       <button onClick={() => setTheme(nextTheme)}>
         Change to {nextTheme} mode
       </button>
+      <button
+        onClick={() => {
+          setSize((prev) => prev + 5);
+        }}
+      >
+        +1 Size
+      </button>
       <div className={theme === 'light' ? themeLight : themeDark}>
+        <Box recSize={recSize}>{recSize}</Box>
         <Title>Theme provider test</Title>
         <PrimaryText>This text is the primary color</PrimaryText>
       </div>

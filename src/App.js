@@ -2,18 +2,14 @@ import { css } from "linaria";
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 
-import CSSVarsWithStyledApp from './css-vars-with-styled';
-import CSSVarsOnly from './css-vars-only';
-import CSSVarsMixed from './css-vars-mixed';
+import CSSVars from './css-vars';
+import ReactContext from './react-context';
 
 const App = () => {
   return (
     <div>
-      <CSSVarsOnly />
-      <hr />
-      <CSSVarsWithStyledApp />
-      <hr />
-      <CSSVarsMixed />
+      <CSSVars />
+      <ReactContext />
     </div>
   );
 };
