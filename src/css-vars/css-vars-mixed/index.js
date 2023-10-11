@@ -25,7 +25,6 @@ const PrimaryText = styled.div`
 `;
 
 const SecondaryText = styled(PrimaryText)`
-  padding: 20px;
   color: var(--colors-background);
   background-color: var(--colors-primary);
 `;
