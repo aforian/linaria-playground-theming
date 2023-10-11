@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "start": "webpack serve --hot",
-    "build": "webpack"
+    "build": "NODE_ENV=test webpack"
   },
   "engines": {
     "node": ">=20",

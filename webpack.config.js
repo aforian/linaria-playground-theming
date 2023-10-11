@@ -4,12 +4,17 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const dev = process.env.NODE_ENV !== 'production';
+const isTest =  process.env.NODE_ENV === 'test';
 
 module.exports = {
-  mode: dev ? 'development' : 'production',
+  mode: dev || isTest ? 'development' : 'production',
   devtool: 'source-map',
-  entry: {
+  entry: !isTest ? {
     app: './src/App',
+  } : {
+    cssVarsApp: './src/css-vars/index',
+    classNamesApp: './src/class-names/index',
+    reactContextApp: './src/react-context/index',
   },
   resolve: {
     fallback: {
@@ -38,7 +43,7 @@ module.exports = {
       'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV) },
     }),
     new MiniCssExtractPlugin({
-      filename: 'styles.css',
+      filename: !isTest ? 'styles.css' : '[name].styles.css',
     }),
     new CleanWebpackPlugin(),
   ],
